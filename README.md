@@ -1,4 +1,4 @@
-# atom-list
+# minne
 A small and simple todo list tui program in rust.
 
 ## Build

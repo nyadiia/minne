@@ -82,11 +82,10 @@ fn main() -> Result<(), io::Error> {
             // Create a paragraph with the above text...
             let graph = Paragraph::new(txt)
                 // In a block with borders and the given title...
-                .block(Block::default().title("Text box").borders(Borders::ALL))
+                .block(Block::default().title("Text box").borders(Borders::ALL).border_type(BorderType::Rounded))
                 // With white foreground and black background...
-                .style(Style::default().fg(Color::White).bg(Color::Black))
-                // Rounds the border :)
-                .border_type(BorderType::Rounded);
+                .style(Style::default().fg(Color::White).bg(Color::Black));
+                
 
             // Render into the second chunk of the layout.
             frame.render_widget(graph, chunks[1]);
