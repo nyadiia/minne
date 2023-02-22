@@ -187,6 +187,7 @@ fn main() -> Result<(), io::Error> {
                 .constraints([Constraint::Percentage(50), Constraint::Percentage(50)].as_ref())
                 .split(chunks[1]);
 
+            // TODO: Change to list type and be able to tab between the different boxes
             // The text lines for our text box.
             let today_txt = vec![Spans::from(
                 "The box above will change colors every three seconds.\n",
