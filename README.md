@@ -8,7 +8,10 @@ cargo build --release
 
 ## Current TODO
 ### Basic Functionality
-- [ ] Display (proper) boxes
+- [X] Display (proper) boxes
+- [X] List
+  - [ ] Arrow keys
+  - [ ] Select different items
 - [ ] Item manipulation
   - [ ] Add
   - [ ] Edit
@@ -16,6 +19,7 @@ cargo build --release
 - [ ] Reminders
   - [ ] Repeating reminders
 - [ ] Simple priority
+- [ ] Text wrapping
   
 ### Extended Functionality
 - [ ] Output number of tasks/simple return options (for [waybar](https://github.com/Alexays/Waybar) or [polybar](https://github.com/polybar/polybar))
@@ -30,3 +34,4 @@ cargo build --release
   - [ ] Themes
   - [ ] Box themes (Rounded, double, etc.)
   - [ ] Layout (very unsure of how to do this atm)
+- [ ] ~~actually understand the code i'm writing~~
