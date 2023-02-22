@@ -140,8 +140,14 @@ fn main() -> Result<(), io::Error> {
             // Create a layout into which to place our blocks.
             let chunks = Layout::default()
                 .direction(Direction::Horizontal)
-                .constraints([Constraint::Percentage(20), Constraint::Percentage(80)].as_ref())
+                .margin(4)
+                .constraints([Constraint::Percentage(40), Constraint::Percentage(60)].as_ref())
                 .split(frame.size());
+            // let left_chunks = Layout::default()
+            //     .direction(Direction::Horizontal)
+            //     .constraints([Constraint::Percentage(100)].as_ref())
+            //     .split(chunks[0]);
+
             // Iterate through all elements in the `items` app and append some debug text to it.
             let items: Vec<ListItem> = app
                 .items
@@ -151,7 +157,7 @@ fn main() -> Result<(), io::Error> {
                     let mut lines = vec![Spans::from(i.0)];
                     for _ in 0..i.1 {
                         lines.push(Spans::from(Span::styled(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                            "funny content",
                             Style::default().add_modifier(Modifier::ITALIC),
                         )));
                     }
@@ -164,7 +170,7 @@ fn main() -> Result<(), io::Error> {
                     Block::default()
                         .borders(Borders::ALL)
                         .border_type(BorderType::Rounded)
-                        .title(" List "),
+                        .title("| List |"),
                 )
                 .style(Style::default().fg(Color::White).bg(Color::Reset))
                 .highlight_style(
@@ -176,17 +182,21 @@ fn main() -> Result<(), io::Error> {
             // We can now render the item list
             frame.render_stateful_widget(items, chunks[0], &mut app.items.state);
 
-            // let list = List::new();
+            let right_chunks = Layout::default()
+                .direction(Direction::Vertical)
+                .constraints([Constraint::Percentage(50), Constraint::Percentage(50)].as_ref())
+                .split(chunks[1]);
+
             // The text lines for our text box.
-            let txt = vec![Spans::from(
+            let today_txt = vec![Spans::from(
                 "The box above will change colors every three seconds.\n",
             )];
             // Create a paragraph with the above text...
-            let today_view = Paragraph::new(txt)
+            let today_view = Paragraph::new(today_txt)
                 // In a block with borders and the given title...
                 .block(
                     Block::default()
-                        .title(" Today View ")
+                        .title("| Today View |")
                         .title_alignment(tui::layout::Alignment::Center)
                         .borders(Borders::ALL)
                         .border_type(BorderType::Rounded),
@@ -195,7 +205,25 @@ fn main() -> Result<(), io::Error> {
                 .style(Style::default().fg(Color::White).bg(Color::Reset));
 
             // Render into the second chunk of the layout.
-            frame.render_widget(today_view, chunks[1]);
+            frame.render_widget(today_view, right_chunks[0]);
+            let details_txt = vec![Spans::from(
+                "The box above will change colors every three seconds.\n",
+            )];
+
+            let detail_view = Paragraph::new(details_txt)
+                // In a block with borders and the given title...
+                .block(
+                    Block::default()
+                        .title("| Details |")
+                        .title_alignment(tui::layout::Alignment::Center)
+                        .borders(Borders::ALL)
+                        .border_type(BorderType::Rounded),
+                )
+                // With white foreground and black background...
+                .style(Style::default().fg(Color::White).bg(Color::Reset));
+
+            // Render into the second chunk of the layout.
+            frame.render_widget(detail_view, right_chunks[1]);
         })?;
 
         // Iterate over all the keys that have been pressed since the

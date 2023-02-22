@@ -12,6 +12,8 @@ cargo build --release
 - [X] List
   - [ ] Arrow keys
   - [ ] Select different items
+- [X] Details
+  - [ ] Functionality
 - [ ] Item manipulation
   - [ ] Add
   - [ ] Edit
