@@ -10,7 +10,7 @@ cargo build --release
 ### Basic Functionality
 - [X] Display (proper) boxes
 - [X] List
-  - [ ] Arrow keys
+  - [X] Arrow keys
   - [ ] Select different items
 - [X] Details
   - [ ] Functionality

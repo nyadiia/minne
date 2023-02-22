@@ -170,7 +170,7 @@ fn main() -> Result<(), io::Error> {
                     Block::default()
                         .borders(Borders::ALL)
                         .border_type(BorderType::Rounded)
-                        .title("| List |"),
+                        .title(" List "),
                 )
                 .style(Style::default().fg(Color::White).bg(Color::Reset))
                 .highlight_style(
@@ -196,12 +196,11 @@ fn main() -> Result<(), io::Error> {
                 // In a block with borders and the given title...
                 .block(
                     Block::default()
-                        .title("| Today View |")
+                        .title(" Today View ")
                         .title_alignment(tui::layout::Alignment::Center)
                         .borders(Borders::ALL)
                         .border_type(BorderType::Rounded),
                 )
-                // With white foreground and black background...
                 .style(Style::default().fg(Color::White).bg(Color::Reset));
 
             // Render into the second chunk of the layout.
@@ -236,6 +235,15 @@ fn main() -> Result<(), io::Error> {
                     // a mess.
                     terminal.clear()?;
                     return Ok(());
+                }
+                Key::Up => {
+                    app.items.previous();
+                }
+                Key::Down => {
+                    app.items.next();
+                }
+                Key::Right => {
+                    app.items.unselect();
                 }
                 // Otherwise, throw them away.
                 _ => (),
