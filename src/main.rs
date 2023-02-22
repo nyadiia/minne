@@ -7,7 +7,7 @@ use tui::backend::TermionBackend;
 use tui::layout::{Constraint, Direction, Layout};
 use tui::style::{Color, Modifier, Style};
 use tui::text::{Span, Spans};
-use tui::widgets::{Block, BorderType, Borders, List, ListItem, Paragraph, ListState};
+use tui::widgets::{Block, BorderType, Borders, List, ListItem, ListState, Paragraph};
 use tui::Terminal;
 struct StatefulList<T> {
     state: ListState,
@@ -142,7 +142,7 @@ fn main() -> Result<(), io::Error> {
                 .direction(Direction::Horizontal)
                 .constraints([Constraint::Percentage(20), Constraint::Percentage(80)].as_ref())
                 .split(frame.size());
-    // Iterate through all elements in the `items` app and append some debug text to it.
+            // Iterate through all elements in the `items` app and append some debug text to it.
             let items: Vec<ListItem> = app
                 .items
                 .items
@@ -157,24 +157,25 @@ fn main() -> Result<(), io::Error> {
                     }
                     ListItem::new(lines).style(Style::default().fg(Color::White).bg(Color::Reset))
                 })
-                .collect();        
+                .collect();
 
             let items = List::new(items)
                 .block(
                     Block::default()
-                    .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .title(" List "))
-                    .style(Style::default().fg(Color::White).bg(Color::Reset))
-                    .highlight_style(
-                        Style::default()
-                            .bg(Color::DarkGray)
-                            .add_modifier(Modifier::BOLD),
+                        .borders(Borders::ALL)
+                        .border_type(BorderType::Rounded)
+                        .title(" List "),
+                )
+                .style(Style::default().fg(Color::White).bg(Color::Reset))
+                .highlight_style(
+                    Style::default()
+                        .bg(Color::DarkGray)
+                        .add_modifier(Modifier::BOLD),
                 );
 
             // We can now render the item list
             frame.render_stateful_widget(items, chunks[0], &mut app.items.state);
-            
+
             // let list = List::new();
             // The text lines for our text box.
             let txt = vec![Spans::from(
